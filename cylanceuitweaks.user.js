@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Cylance Web UI Tweaks
 // @namespace    http://javex.tech/
-// @version      0.1.0
+// @version      0.1.1
 // @description  Collection of tweaks for the Cylance Web UI
 // @author       Shaun Hammill <shaun.hammill@mpiresearch.com>
 // @match        https://protect.cylance.com/Device/DisplayDeviceDetails
@@ -65,10 +65,11 @@
                             field: column
                         }]))
                         .css({cursor:"pointer",color:"rgb(8, 101, 152)"})
-                        .hover(
-                            _=>$(this).css({"text-decoration-line":"underline"}),
-                            _=>$(this).css({"text-decoration-line":"none"}),
-                        )
+                        // TODO: Fix hover selection bug
+                        // .hover(
+                        //     _=>$(this).css({"text-decoration-line":"underline"}),
+                        //     _=>$(this).css({"text-decoration-line":"none"}),
+                        // )
                     ;
                 });
             });
