@@ -1,6 +1,13 @@
-# Pllois.Cylance.Tweaks
+# Plloi's Cylance Tweaks
 Collection of tweaks for the Cylance Web UI
-Currently just USB Tables
+
+Makes the Following changes on External Devices tables:
+* Add Vender info to the Vendor ID Column
+* Add Product info to Product ID Column
+* Add One click filtering to Vendor ID Column
+* Add One click filtering to Product ID Column
+* Add One click filtering to Serial Number Column
+
 
 ### Installation
 
