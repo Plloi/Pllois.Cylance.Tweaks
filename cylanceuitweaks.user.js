@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Cylance Web UI Tweaks
 // @namespace    http://javex.tech/
-// @version      0.1.1
+// @version      0.1.2
 // @description  Collection of tweaks for the Cylance Web UI
 // @author       Shaun Hammill <shaun.hammill@mpiresearch.com>
 // @match        https://protect.cylance.com/Device/DisplayDeviceDetails
