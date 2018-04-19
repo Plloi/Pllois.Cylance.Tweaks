@@ -10,7 +10,7 @@
 
 // ==/UserScript==
 (function() {
-    'use strict';
+    "use strict";
     let USBIDSRAW;
 
     function main(){
@@ -18,35 +18,39 @@
         // Replace this with a preprocessed JSON File
         let USBIDS={};
         let current;
-        let Reg = /^(\t?)(\w{4})  (.*)$/;
-        USBIDSRAW.split('\n').map(line=>{
+        let Reg = /^(\t?)(\w{4}) {2}(.*)$/;
+        USBIDSRAW.split("\n").map((line) => {
             let match;
-            if (line[0] === '#')
+            if (line[0] === "#") {
                 return;
+            }
             else if ((match = Reg.exec(line)) !== null) {
-                if(match[1]==='')
-                    current = USBIDS[match[2]]={'name':match[3]};
-                else
-                    current[match[2]]={'name':match[3]};
+                if(match[1]==="") {
+                    current = USBIDS[match[2]]={"name":match[3]};
+                }
+                else {
+                    current[match[2]]={"name":match[3]};
+                }
             }
         });
 
         //Alter Grid Data
         let grid = $("#grid_ExternalDevices,#ExternalDevices_Grid").data("kendoGrid");
 
-        grid.bind("dataBound", _=>{
+        grid.bind("dataBound", (_) => {
             function setNewInnerHTML(that, devId, devString){
-                ($(that).find("td:contains('"+devId+"')"))[0].innerHTML = ["<span>", devString," - ",devId,"</span>"].join('');
+                ($(that).find("td:contains('"+devId+"')")).text(`${devString} - ${devId}`);
             }
 
             grid.tbody.find("tr").each(function(e){
                 let model = grid.dataItem(this);
                 // If we have Manufacturer identifier in lookup add data to table
-                if (USBIDS[model.ExternalDeviceVendorId.toLowerCase()] !== undefined) {
+                if (USBIDS[model.ExternalDeviceVendorId.toLowerCase()] !== [][null]) {
                     setNewInnerHTML(this, model.ExternalDeviceVendorId, USBIDS[model.ExternalDeviceVendorId.toLowerCase()].name);
                     // If we have device identifier in lookup add data to table
-                    if (USBIDS[model.ExternalDeviceVendorId.toLowerCase()][model.ExternalDeviceId.toLowerCase()] !== undefined)
+                    if (USBIDS[model.ExternalDeviceVendorId.toLowerCase()][model.ExternalDeviceId.toLowerCase()] !== [][null]) {
                         setNewInnerHTML(this, model.ExternalDeviceId, USBIDS[model.ExternalDeviceVendorId.toLowerCase()][model.ExternalDeviceId.toLowerCase()].name);
+                    }
                 }
                 /* TODO:
 				* Handle DeviceName
@@ -57,9 +61,9 @@
 				  * Determine Logic for other fields.
                 */
 
-                ["ExternalDeviceId","ExternalDeviceVendorId", "ExternalDeviceSerialNumber"].map(column=>{
+                ["ExternalDeviceId","ExternalDeviceVendorId", "ExternalDeviceSerialNumber"].map((column) => {
                     $(this).find("td:contains('"+model[column]+"')")
-                        .click(_=>grid.dataSource.filter([{
+                        .click((_) => grid.dataSource.filter([{
                             operator: "equals",
                             value: model[column],
                             field: column
@@ -75,7 +79,7 @@
             });
         });
         grid.dataSource.fetch();
-    };
+    }
 
 // TODO: Prebuild the USB Device lookup table
 // Replace this with a preprocessed JSON File
@@ -21343,6 +21347,6 @@ VT 0400  External Vendor Specific
 VT 0401  Composite Video
 VT 0402  S-Video
 VT 0403  Component Video
-`;})();
+`;}());
     main();
-})();
+}());
