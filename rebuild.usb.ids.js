@@ -1,19 +1,18 @@
-var http = require('https');
-var fs = require('fs');
+var http = require("https");
+var fs = require("fs");
 
 var request = http.get("https://usb-ids.gowdy.us/usb.ids", function(res) {
     if (res.statusCode !== 200) {
-        console.error("Failed to download updated usb.ids file");
+        process.exitCode = res.statusCode;
         res.resume();
         return;
     }
 
     let usbIdsFile="";
 
-    res.on("data", (chunk) => { usbIdsFile += chunk });
+    res.on("data", (chunk) => { usbIdsFile += chunk; });
 
     res.on("end", (_) => {
-        console.log(usbIdsFile.length)
         let USBIDS={};
         let current;
         let Reg = /^(\t?)(\w{4}) {2}(.*)$/;
@@ -31,6 +30,6 @@ var request = http.get("https://usb-ids.gowdy.us/usb.ids", function(res) {
                 }
             }
         });
-        fs.writeFile("usb.ids.json", JSON.stringify(USBIDS,null,2), 'utf8', console.log);
+        fs.writeFile("usb.ids.json", JSON.stringify(USBIDS,null,2), 'utf8', (callBackToSilenceNode) => {});
     });
 });
