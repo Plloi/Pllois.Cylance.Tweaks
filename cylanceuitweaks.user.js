@@ -7,6 +7,7 @@
 // @match        https://protect.cylance.com/Device/DisplayDeviceDetails
 // @match        https://protect.cylance.com/Threats
 // @updateURL    https://github.com/Plloi/Pllois.Cylance.Tweaks/raw/master/cylanceuitweaks.user.js
+// @grant        GM_getResourceText
 // @resource     USBIDS  usb.ids.json
 
 // ==/UserScript==
