@@ -30,6 +30,6 @@ var request = http.get("https://usb-ids.gowdy.us/usb.ids", function(res) {
                 }
             }
         });
-        fs.writeFile("usb.ids.json", JSON.stringify(USBIDS,null,2), 'utf8', (callBackToSilenceNode) => {});
+        fs.writeFile("usb.ids.json", JSON.stringify(USBIDS,null,2), "utf8", (callBackToSilenceNode) => {});
     });
 });
