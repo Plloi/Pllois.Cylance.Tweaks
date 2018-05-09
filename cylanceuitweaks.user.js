@@ -13,6 +13,19 @@
 // ==/UserScript==
 (function() {
     "use strict";
+
+    //Update Virus total links to point to current site
+    function updateVTLinks() {
+        $("a").filter((a,b)=>b.href = b.href.replace("www.virustotal.com/en/","www.virustotal.com/#/"));
+    }
+
+    $("#grid_DeviceThreat_Active,#grid_DeviceThreat_Removed").each(function(){
+        $(this)
+            .data("kendoGrid")
+            .bind("dataBound",updateVTLinks)
+        ;
+    });
+
     let USBIDS = JSON.parse(GM_getResourceText("USBIDS"));
 
     //Alter Grid Data
@@ -21,7 +34,7 @@
     grid.bind("dataBound", (_) => {
         function setNewInnerHTML(that, devId, devString){
             ($(that).find("td:contains('"+devId+"')")).text(`${devString} - ${devId}`);
-        }
+        }s
 
         grid.tbody.find("tr").each(function(e){
             let model = grid.dataItem(this);
@@ -34,12 +47,12 @@
                 }
             }
             /* TODO:
-			* Handle DeviceName
-			  * Make PC name filter by pc
-			  * Add link to open device in new window.
-			* Add Logic to handle filter Stacking
-			  * Vendor and Product ID's should play happily in the filters list with each other
-			  * Determine Logic for other fields.
+            * Handle DeviceName
+              * Make PC name filter by pc
+              * Add link to open device in new window.
+            * Add Logic to handle filter Stacking
+              * Vendor and Product ID's should play happily in the filters list with each other
+              * Determine Logic for other fields.
             */
 
             ["ExternalDeviceId","ExternalDeviceVendorId", "ExternalDeviceSerialNumber"].map((column) => {
@@ -59,5 +72,4 @@
             });
         });
     });
-    grid.dataSource.fetch();
 }());
