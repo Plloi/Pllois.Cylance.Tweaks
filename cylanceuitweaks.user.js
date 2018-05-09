@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Cylance Web UI Tweaks
 // @namespace    http://javex.tech/
-// @version      0.2.0
+// @version      0.2.1
 // @description  Collection of tweaks for the Cylance Web UI
 // @author       Shaun Hammill <shaun.hammill@mpiresearch.com>
 // @match        https://protect.cylance.com/Device/DisplayDeviceDetails
@@ -19,7 +19,7 @@
         $("a").filter((a,b) => b.href = b.href.replace("www.virustotal.com/en/","www.virustotal.com/#/"));
     }
 
-    $("#grid_DeviceThreat_Active,#grid_DeviceThreat_Removed").each(function(){
+    $("#grid_DeviceThreat_Active,#grid_DeviceThreat_Removed,#ActiveThreats_Grid").each(function(){
         $(this)
             .data("kendoGrid")
             .bind("dataBound",updateVTLinks)
