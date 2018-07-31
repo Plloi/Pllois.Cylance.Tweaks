@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Cylance Web UI Tweaks
 // @namespace    http://javex.tech/
-// @version      0.2.1
+// @version      0.2.2
 // @description  Collection of tweaks for the Cylance Web UI
 // @author       Shaun Hammill <shaun.hammill@mpiresearch.com>
 // @match        https://protect.cylance.com/Device/DisplayDeviceDetails
@@ -9,6 +9,7 @@
 // @updateURL    https://github.com/Plloi/Pllois.Cylance.Tweaks/raw/master/cylanceuitweaks.user.js
 // @grant        GM_getResourceText
 // @resource     USBIDS  usb.ids.json
+// @run-at       document-idle
 
 // ==/UserScript==
 (function() {
