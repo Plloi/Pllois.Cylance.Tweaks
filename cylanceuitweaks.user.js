@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Cylance Web UI Tweaks
 // @namespace    http://javex.tech/
-// @version      0.2.2
+// @version      0.2.3
 // @description  Collection of tweaks for the Cylance Web UI
 // @author       Shaun Hammill <shaun.hammill@mpiresearch.com>
 // @match        https://protect.cylance.com/Device/DisplayDeviceDetails
@@ -17,7 +17,7 @@
 
     //Update Virus total links to point to current site
     function updateVTLinks() {
-        $("a").filter((a,b) => b.href = b.href.replace("www.virustotal.com/en/","www.virustotal.com/#/"));
+        $("a").filter((a,b) => b.href = b.href.replace("www.virustotal.com/en/","www.virustotal.com/gui/").replace("/analysis/", "/details"));
     }
 
     $("#grid_DeviceThreat_Active,#grid_DeviceThreat_Removed,#ActiveThreats_Grid").each(function(){
