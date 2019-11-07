@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Cylance Web UI Tweaks
 // @namespace    http://javex.tech/
-// @version      0.2.3
+// @version      0.2.4
 // @description  Collection of tweaks for the Cylance Web UI
 // @author       Shaun Hammill <shaun.hammill@mpiresearch.com>
 // @match        https://protect.cylance.com/Device/DisplayDeviceDetails
@@ -40,10 +40,10 @@
         grid.tbody.find("tr").each(function(e){
             let model = grid.dataItem(this);
             // If we have Manufacturer identifier in lookup add data to table
-            if (USBIDS[model.ExternalDeviceVendorId.toLowerCase()] !== [][null]) {
+            if (USBIDS.hasOwnProperty(model.ExternalDeviceVendorId.toLowerCase())) {
                 setNewInnerHTML(this, model.ExternalDeviceVendorId, USBIDS[model.ExternalDeviceVendorId.toLowerCase()].name);
                 // If we have device identifier in lookup add data to table
-                if (USBIDS[model.ExternalDeviceVendorId.toLowerCase()][model.ExternalDeviceId.toLowerCase()] !== [][null]) {
+                if (USBIDS[model.ExternalDeviceVendorId.toLowerCase()].hasOwnProperty(model.ExternalDeviceId.toLowerCase())) {
                     setNewInnerHTML(this, model.ExternalDeviceId, USBIDS[model.ExternalDeviceVendorId.toLowerCase()][model.ExternalDeviceId.toLowerCase()].name);
                 }
             }
@@ -51,7 +51,7 @@
             * Handle DeviceName
               * Make PC name filter by pc
               * Add link to open device in new window.
-            * Add Logic to handle filter Stacking
+              * Add Logic to handle filter Stacking
               * Vendor and Product ID's should play happily in the filters list with each other
               * Determine Logic for other fields.
             */

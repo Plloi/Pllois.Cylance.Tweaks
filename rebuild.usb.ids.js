@@ -1,7 +1,7 @@
 var http = require("https");
 var fs = require("fs");
 
-var request = http.get("https://usb-ids.gowdy.us/usb.ids", function(res) {
+http.get("https://usb-ids.gowdy.us/usb.ids", function(res) {
     if (res.statusCode !== 200) {
         process.exitCode = res.statusCode;
         res.resume();
